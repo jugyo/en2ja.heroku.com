@@ -1,0 +1,21 @@
+.source = text
+
+.arrow &#11015;
+
+.target
+  #google-translate-result ...
+  #powerd-by-google-translate-api
+    span powerd by 
+    a href="http://code.google.com/intl/ja/apis/language/translate/overview.html" Google Translate API
+
+javascript:
+  function googleTranslate(response) {
+      var result = response.data.translations[0].translatedText;
+      $('#google-translate-result').text(result);
+  }
+  $(function() {
+      $('<script>').attr({
+          type: "text/javascript",
+          src: "https://www.googleapis.com/language/translate/v2?key=AIzaSyDf3VkeewjJd884BrTyOBiw-1KggQ0537g&source=#{source}&target=#{target}&callback=googleTranslate&q=#{text}"
+      }).appendTo($('head'));
+  });
